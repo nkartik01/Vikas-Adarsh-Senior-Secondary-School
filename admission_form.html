@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <title>Admission Form</title>
+    <style media="screen">
+      .error{
+        color: red;
+        text-align: left;
+      }
+      #myHiddenPage{
+        display:none;
+      }
+      @media (min-width: 992px){
+        .navbar li {
+          margin-left : 1.8em;
+          margin-right : 1.8em;
+          font-weight: bold;
+
+        }
+        form{
+          text-align: center;
+          display: inline-block;
+          align: center;
+          width: 65%;
+          margin-left: 15%;
+          margin-right: 20%;
+        }
+        .form-group{
+          opacity:0.8;
+        }
+        .col-25 {
+          float: left;
+          width: 25%;
+          margin-top: 6px;
+        }
+
+        .col-75 {
+          float: left;
+          width: 75%;
+          margin-top: 6px;
+        }
+      }
+      label{
+        font-weight: bold;
+      }
+      .nav-item{
+        font-size: 20px;
+      }
+    </style>
+    <script>
+      var val=0;
+      var e=0;
+      var num=0
+      var name=0
+      function give_otp(){
+        num=document.getElementById('mobile').value;
+        name=document.getElementById('name').value;
+        var father=document.getElementById('father').value;
+        var mother=document.getElementById('mother').value;
+        var uid=document.getElementById('uid').value;
+        var address=document.getElementById('address').value;
+
+        if (name.length<3){
+          document.getElementById("name_error").innerHTML='Please enter a valid Name'
+          e1=1;
+        }
+        else{
+          document.getElementById("name_error").innerHTML='';
+          e1=0;
+        }
+        if (father.length<3){
+          document.getElementById("father_error").innerHTML='Please enter a valid Name'
+          e2=1;
+        }
+        else{
+          document.getElementById("father_error").innerHTML='';
+          e2=0;
+        }
+        if (mother.length<3){
+          document.getElementById("mother_error").innerHTML='Please enter a valid Mobile Number'
+          e3=1;
+        }
+        else{
+          document.getElementById("mother_error").innerHTML='';
+          e3=0;
+        }
+        if (uid.length!=12 && uid.length!=0){
+          document.getElementById("uid_error").innerHTML='Please enter a valid Aadhar Number'
+          e4=1;
+        }
+        else{
+          document.getElementById("uid_error").innerHTML='';
+          e4=0;
+        }
+        if (num.length!=10){
+          document.getElementById("mob_error").innerHTML='Please enter a valid Mobile Number'
+          e5=1;
+        }
+        else{
+          document.getElementById("mob_error").innerHTML='';
+          e5=0;
+        }
+        if(document.getElementById('dob').value==''){
+          document.getElementById("dob_error").innerHTML='Please enter a valid Date of Birth'
+          e6=1;
+        }
+        else{
+          document.getElementById("dob_error").innerHTML='';
+          e6=0;
+        }
+        if (address.length<3){
+          document.getElementById("address_error").innerHTML='Please enter a valid Address'
+          e3=1;
+        }
+        else{
+          document.getElementById("address_error").innerHTML='';
+          e3=0;
+        }
+        if(e1==0 && e2==0 && e3==0 && e4==0 && e5==0 && e6==0){
+          var o=document.getElementById("initial")
+          console.log(o)
+          o.style.display='none'
+          document.getElementById('form1').submit()
+        //   var o=document.getElementById("otp_div").removeAttribute('hidden');
+        //   send_otp();
+          return false
+
+        }
+      }
+      function send_otp(){
+        val = Math.floor(1000 + Math.random() * 9000);
+        msg1="Dear%20Applicant,%20"+val+"%20is%20the%20OTP%20for%20Admission.%20Valid%20for%205%20minutes-Vikas%20Adarsh%20Senior%20Secondary%20School"
+	    sms_result(num,msg1);
+
+	      // var winmsg=window.open(msg2,'_blank','location=no,scrollbars=yes,status=no,toolbar=no,addressbar=no,resizable=yes','name');
+        // window.focus()
+        // window.setTimeout(function () {
+        //   winmsg.close()
+        // }, ss);
+
+      }
+    //   function validate_otp(){
+    //     var entered_otp=document.getElementById('otp').value;
+    //     if (entered_otp==val){
+    //       document.getElementById('form1').submit()
+    //     }
+    //     else{
+    //       document.getElementById('otp_error').innerHTML='Wrong OTP Entered.'
+    //     }
+    //   }
+    </script>
+    <script src="nav.js"></script>
+  </head>
+  <body style="background-image: url('logo1.png');background-size: 100% 100%;background-repeat:no-repeat;margin-left: auto;margin-right: auto;width: 100%;background-attachment: fixed;  ">
+    <script>
+      display_nav();
+    </script>
+    <form name='details' method="post" id='form1' action="entertodb.php">
+      <div id="initial">
+        <div class="form-group row">
+          <div class="col-25">
+              <label for="name">Student Name</label>
+          </div>
+
+          <div class="col-75">
+            <input  type="text" class="form-control" name="name" id="name" placeholder="Enter Student Name" required width="100%" autofocus>
+            <p id="name_error" class="error"></p>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-25">
+            <label for="father">Father's Name</label>
+          </div>
+          <div class="col-75">
+            <input type="text" class="form-control" id="father" name="father" placeholder="Enter Father Name" required>
+            <p id="father_error" class="error"></p>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <div class="col-25">
+            <label for="mother">Mother's Name</label>
+          </div>
+          <div class="col-75">
+            <input type="text" class="form-control" id="mother" name="mother" placeholder="Enter Mother Name" required>
+            <p id="mother_error" class="error"></p>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-25">
+            <label for="class">Class</label>
+          </div>
+          <div class="col-75">
+            <select class="form-control" name="class">
+              <option value="nur">Nursery</option>
+              <option value="kg">KG</option>
+              <option value="1st">1st</option>
+              <option value="2nd">2nd</option>
+              <option value="3rd">3rd</option>
+              <option value="4th">4th</option>
+              <option value="5th">5th</option>
+              <option value="6th">6th</option>
+              <option value="7th">7th</option>
+              <option value="8th">8th</option>
+              <option value="9th">9th</option>
+              <option value="10th">10th</option>
+              <option value="+1">+1</option>
+              <option value="+2">+2</option>
+            </select>
+            <p></p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-25">
+            <label for="uid">Aadhar Number</label>
+          </div>
+          <div class="col-75">
+            <input type="number" class="form-control" id="uid" name="uid" placeholder="Enter Aadhar Number(Leave Empty if Aadhar not Available)">
+            <p id="uid_error" class="error"></p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-25">
+            <label for="dob">Date of Birth</label>
+          </div>
+          <div class="col-75">
+            <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter Date of Birth" required>
+            <p id="dob_error" class="error"></p>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-25">
+            <label for="mobile">Mobile Number</label>
+          </div>
+          <div class="col-75">
+            <input type="number" class="form-control" id="mobile" name="mobile" placeholder="Enter Mobile Number" required>
+            <p id="mob_error" class="error"></p>
+          </div>
+
+        </div>
+        <div class="form-group row">
+          <div class="col-25">
+            <label for="address">Address</label>
+          </div>
+          <div class="col-75">
+            <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" required>
+            <p id='address_error' class'error'></p>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="give_otp()" >Next</button>
+        <button type="button" class="btn  btn-secondary" onclick="window.open('index.html')">Close</button>
+      </div>
+      <!--<div class="form-group" hidden id="otp_div">-->
+      <!--  <label for="otp" >Enter the OTP recieved on your mobile number</label>-->
+      <!--  <input type="number" name="otp"  class="form-control" id='otp'>-->
+      <!--  <br>-->
+      <!--  <button type="button" class="btn btn-primary" onclick="validate_otp()" >Submit</button>-->
+      <!--  <button type='button' class="btn btn-primary" onclick="send_otp()">Resend OTP</button>-->
+      <!--  <p id="otp_error" class="error"></p>-->
+      <!--</div>-->
+      <script>
+          otp_div();
+      </script>
+      <input type="button" name="submit_button" value="submit_button" id='submit_button' hidden>
+
+     </form>
+
+    <div id='myHiddenPage'></div>
+
+  </body>
+</html>
